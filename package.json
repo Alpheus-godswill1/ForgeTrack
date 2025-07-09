@@ -1,0 +1,46 @@
+{
+  "name": "forgetrack",
+  "version": "1.0.0",
+  "description": "A craftsman’s tool for daily discipline.",
+  "keywords": [
+    "Node.js",
+    "JavaScript",
+    "CLI",
+    "Command",
+    "Line",
+    "Tool",
+    "Task",
+    "Tracker",
+    "To-Do",
+    "CLI",
+    "JSON",
+    "Storage",
+    "File",
+    "System",
+    "process.argv",
+    "fs",
+    "module",
+    "No",
+    "Dependencies",
+    "Vanilla",
+    "JS",
+    "Cross-platform",
+    "Docker",
+    "Docker",
+    "Compose",
+    "DevOps",
+    "Containerized",
+    "CLI"
+  ],
+  "license": "ISC",
+  "author": "Alpheus",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "jest": "^30.0.4"
+  }
+}
