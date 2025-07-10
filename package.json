@@ -32,6 +32,9 @@
     "Containerized",
     "CLI"
   ],
+  "bin": {
+  "task-cli": "./app.js"
+  },
   "license": "ISC",
   "author": "Alpheus",
   "type": "commonjs",

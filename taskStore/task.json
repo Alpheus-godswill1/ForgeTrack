@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "description": "I want to get food",
+    "status": "todo",
+    "createdAt": "2025-07-10T14:56:24.629Z",
+    "updatedAt": "2025-07-10T14:56:24.629Z"
+  },
+  {
+    "id": 2,
+    "description": "Fishing on sunday evening",
+    "status": "todo",
+    "createdAt": "2025-07-10T15:17:47.643Z",
+    "updatedAt": "2025-07-10T15:17:47.643Z"
+  }
+]
