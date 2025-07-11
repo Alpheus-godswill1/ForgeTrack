@@ -45,22 +45,31 @@ function addTask(task) {
 }
 
 function listTasks() {
-    // Read the file
-   const data = fs.readFileSync(filePath, 'utf8')
+   // Read the file and convert Json string to array of tasks
+   const tasks = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+   const taskArg = process.argv[3];
 
-   // convert Json string to array of tasks
-   const tasks = JSON.parse(data)
+  // If a specific task ID is provided
+  if(taskArg) {
+    const taskID = parseInt(taskArg);
+    const task = tasks.find(t => t.id === taskID);
 
-   // check if the array is empty
-   if(tasks.length === 0){
-     console.log("No tasks found.")
-     return;
-   }
+    if (!task) {
+      console.log(`Task with ID ${taskID} not found.`);
+      return;
+    }
+    console.log(`📝 [${task.id}] ${task.description} - Status: ${task.status}`);
+  } else {
+    // If no ID, list all tasks
+    if (tasks.length === 0) {
+      console.log("No tasks found.");
+      return;
+    }
 
     tasks.forEach(task => {
-        console.log(`📝 [${task.id}] ${task.description} - Status: ${task.status}`);
-   });
-
+      console.log(`📝 [${task.id}] ${task.description} - Status: ${task.status}`);
+    });
+  }
 }
 
 function removeTask(task) {
@@ -116,6 +125,25 @@ if(!fs.existsSync(filePath)){
     fs.writeFileSync(filePath, JSON.stringify([]), 'utf8')
 }
 
+function help() {
+    console.log("\nTask CLI - Command Line Task Manager");
+    console.log("--------------------------------------");
+    console.log("Usage:");
+    console.log("  task-cli <command> [arguments]\n");
+    console.log("Available Commands:");
+    console.log("  add <description>         Add a new task");
+    console.log("  list                      List all tasks");
+    console.log("  list <id>                 Show a specific task by ID");
+    console.log("  update <id> <description> Update the description of a task");
+    console.log("  remove <id>               Remove a task by ID");
+    console.log("  help                      Display this help message\n");
+    console.log("Examples:");
+    console.log("  task-cli add \"Buy groceries\"");
+    console.log("  task-cli list");
+    console.log("  task-cli list 2");
+    console.log("  task-cli update 2 \"Buy fruits instead\"");
+    console.log("  task-cli remove 3\n");
+  }
 const command = process.argv[2];
 const task = process.argv[3];
 
