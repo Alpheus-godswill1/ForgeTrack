@@ -17,7 +17,6 @@ function addTask(task) {
 
     // Load existing Tasks    
     const data = fs.readFileSync(filePath, 'utf8')
-    console.log(data)
     const tasks = JSON.parse(data)
 
     // Generate new ID
@@ -72,9 +71,22 @@ function listTasks() {
   }
 }
 
-function removeTask(task) {
-    console.log(`Removing task: ${task}`);
+function removeTask() {
+    const taskArg = parseInt(process.argv[3])
+    const tasks = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+    
+    const taskIndex = tasks.findIndex(t => t.id === taskArg)
+    console.log(taskIndex)
 
+    if(taskIndex === -1){
+        console.log(`No task with [${taskArg}] as ID exist in the taskStore`)
+        return;
+    }
+   
+    const removedTask = tasks.splice(taskIndex, 1)[0];
+    fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2), 'utf8');
+  
+    console.log(`Task [${removedTask.id}] removed successfully: "${removedTask.description}"`);
 }
 
 function updateTask() {
