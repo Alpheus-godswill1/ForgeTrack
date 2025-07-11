@@ -3,7 +3,6 @@
 // 2. What arguments (parameters) go with that command?
 // 3. Based on the command, what function should I run?
 
-const isUtf8  = require('buffer')
 const fs = require('fs')
 const path = require('path')
 
@@ -12,12 +11,12 @@ const filePath = path.join(dirPath, 'task.json')
 
 function addTask(task) {
    if(!task || task.trim().length===0){
-    console.log("❌ Task description is missing. Use: task-cli add <task>");
+    console.log("Task description is missing. Use: task-cli add <task>");
     return;
    }
 
     // Load existing Tasks    
-    const data = fs.readFileSync(filePath, isUtf8)
+    const data = fs.readFileSync(filePath, 'utf8')
     console.log(data)
     const tasks = JSON.parse(data)
 
@@ -40,14 +39,14 @@ function addTask(task) {
     tasks.push(newTask)
     
     // Save Updated task list
-    fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2), isUtf8)
+    fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2), 'utf8')
     
-    console.log(`✅ Task added successfully (ID: ${id})`)
+    console.log(`Task added successfully (ID: ${id})`)
 }
 
 function listTasks() {
     // Read the file
-   const data = fs.readFileSync(filePath, isUtf8)
+   const data = fs.readFileSync(filePath, 'utf8')
 
    // convert Json string to array of tasks
    const tasks = JSON.parse(data)
@@ -69,17 +68,44 @@ function removeTask(task) {
 
 }
 
-function updateTask(task) {
-    console.log(`Updating task: ${task}`);
-}
+function updateTask() {
+    // Parse content argument
+    const taskID = parseInt(process.argv[3])
+    const newDescription = process.argv.slice(4).join(" ");
+    
+    // Convert Json content to an Array by Parsing
+    const tasks = JSON.parse(fs.readFileSync(filePath, 'utf8'))
 
-function help() {
-    console.log("Usage: ./app.js <command> <task>");
-    console.log("Commands:");
-    console.log("add <task> - Add a new task");
-    console.log("list - List all tasks");
-    console.log("update - update a task");
-    console.log("remove <task> - Remove a task");
+    //Find task by ID
+    const taskIndex = tasks.findIndex(t => t.id === taskID)
+    console.log(task)
+    
+    // Get timestamp
+    const now = new Date().toISOString();
+
+    // check if the array is empty
+    if(taskIndex === -1){
+        console.log("No tasks found.")
+        return;
+    }
+
+    //Check if Description argument was assigned.
+    if(!newDescription || newDescription.trim() === ""){
+        console.log("Description cannot be empty. Use: task-cli update <id> <new description>");
+        return;
+    }
+
+    const existingTask = tasks[taskIndex]
+    const updatedTask = {
+        id: existingTask.id,
+        description:  newDescription,
+        status: existingTask.status,
+        createdAt: existingTask.createdAt,
+        updatedAt: now,
+      };
+    tasks[taskIndex] = updatedTask
+    fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2),'utf8')
+    console.log(`Task [${taskID}] successfull updated without any hitch!!!`)
 }
 
 if(!fs.existsSync(dirPath)){
@@ -87,11 +113,10 @@ if(!fs.existsSync(dirPath)){
 }
 
 if(!fs.existsSync(filePath)){
-    fs.writeFileSync(filePath, JSON.stringify([]), isUtf8)
+    fs.writeFileSync(filePath, JSON.stringify([]), 'utf8')
 }
 
 const command = process.argv[2];
-console.log(command)
 const task = process.argv[3];
 
 if (command === "add") {
@@ -99,7 +124,7 @@ if (command === "add") {
 } else if (command === "list") {
     listTasks();
 } else if (command === "update"){
-    updateTask(task)
+    updateTask()
 }
 else if (command === "help"){
     help()
