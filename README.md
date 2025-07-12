@@ -35,16 +35,22 @@ The user interacts with the tool like this:
 
 ```bash
 # Add a task
-node app.js add "Write project documentation"
+task-cli add "Write project documentation"
 
 # Update a task
-node app.js update 1 "Write README and setup docs"
+task-cli update 1 "Write README and setup docs"
 
 # Mark task as done
-node app.js mark-done 1
+task-cli task-done 1
+
+# Mark task as in progress
+task-cli task-in-progress 1
 
 # List all tasks
-node app.js list
+task-cli list
 
 # List only done tasks
-node app.js list done
+task-cli list done
+
+# Help Guide
+task-cli  help

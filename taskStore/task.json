@@ -1,19 +1,5 @@
 [
   {
-    "id": 1,
-    "description": "I am going to buy my first car this year, 20 November, 2025",
-    "status": "todo",
-    "createdAt": "2025-07-11T13:53:39.572Z",
-    "updatedAt": "2025-07-11T13:53:39.572Z"
-  },
-  {
-    "id": 2,
-    "description": "I will complete my Node.js roadmap by 15 August, 2025",
-    "status": "todo",
-    "createdAt": "2025-07-11T13:55:53.093Z",
-    "updatedAt": "2025-07-11T13:55:53.093Z"
-  },
-  {
     "id": 3,
     "description": "Schedule dentist appointment for 5 September, 2025",
     "status": "todo",
@@ -51,16 +37,16 @@
   {
     "id": 8,
     "description": "Renew my passport by 25 August, 2025",
-    "status": "todo",
+    "status": "done",
     "createdAt": "2025-07-11T13:56:49.091Z",
-    "updatedAt": "2025-07-11T13:56:49.091Z"
+    "updatedAt": "2025-07-11T17:26:23.425Z"
   },
   {
     "id": 9,
     "description": "Start learning Docker by 1 September, 2025",
-    "status": "todo",
+    "status": "done",
     "createdAt": "2025-07-11T13:56:49.184Z",
-    "updatedAt": "2025-07-11T13:56:49.184Z"
+    "updatedAt": "2025-07-11T17:26:26.778Z"
   },
   {
     "id": 10,
@@ -128,15 +114,8 @@
   {
     "id": 19,
     "description": "Schedule car service appointment for 18 September, 2025",
-    "status": "todo",
+    "status": "done",
     "createdAt": "2025-07-11T13:56:50.114Z",
-    "updatedAt": "2025-07-11T13:56:50.114Z"
-  },
-  {
-    "id": 20,
-    "description": "Plan healthy meal prep starting 1 September, 2025",
-    "status": "todo",
-    "createdAt": "2025-07-11T13:56:50.201Z",
-    "updatedAt": "2025-07-11T13:56:50.201Z"
+    "updatedAt": "2025-07-11T17:26:55.179Z"
   }
 ]

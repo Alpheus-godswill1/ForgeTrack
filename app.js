@@ -48,28 +48,42 @@ function listTasks() {
    const tasks = JSON.parse(fs.readFileSync(filePath, 'utf8'));
    const taskArg = process.argv[3];
 
-  // If a specific task ID is provided
-  if(taskArg) {
-    const taskID = parseInt(taskArg);
-    const task = tasks.find(t => t.id === taskID);
+   if(!tasks || tasks.length===0){
+    console.log("No tasks found.");
+    return;
+   }
 
-    if (!task) {
-      console.log(`Task with ID ${taskID} not found.`);
+//   // If taskArg is a number → Try to match ID
+//   if(tasks) {
+//     const taskID = parseInt(taskArg);
+//     const task = tasks.find(t => t.id === taskID);
+
+//     if (!task) {
+//       console.log(`Task with ID ${taskID} not found.`);
+//       return;
+//     }
+//     console.log(`📝 [${task.id}] ${task.description} - Status: ${task.status}`);
+//   } 
+
+  // If taskArg is a valid status → Filter by status
+  if(["todo","done", "in-progress"].includes(taskArg)){
+    const filtered = tasks.filter(t => t.status === taskArg);
+
+    if (filtered.length === 0) {
+        console.log(`No "${taskArg}" tasks found.`);
+        return;
+      }
+      filtered.forEach(task =>{
+        console.log(`📝 [${task.id}] ${task.description} - Status: ${task.status}`);
+      });
       return;
     }
-    console.log(`📝 [${task.id}] ${task.description} - Status: ${task.status}`);
-  } else {
-    // If no ID, list all tasks
-    if (tasks.length === 0) {
-      console.log("No tasks found.");
-      return;
-    }
-
+    // If no argument → List all tasks
     tasks.forEach(task => {
       console.log(`📝 [${task.id}] ${task.description} - Status: ${task.status}`);
     });
   }
-}
+
 
 function removeTask() {
     const taskArg = parseInt(process.argv[3])
@@ -93,40 +107,53 @@ function updateTask() {
     // Parse content argument
     const taskID = parseInt(process.argv[3])
     const newDescription = process.argv.slice(4).join(" ");
-    
-    // Convert Json content to an Array by Parsing
-    const tasks = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+    const command = process.argv[2];
 
-    //Find task by ID
+     // Convert Json content to an Array by Parsing (Loads task from file)
+     const tasks = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+
+    //Find task by Index
     const taskIndex = tasks.findIndex(t => t.id === taskID)
-    console.log(task)
-    
-    // Get timestamp
-    const now = new Date().toISOString();
 
     // check if the array is empty
     if(taskIndex === -1){
         console.log("No tasks found.")
         return;
     }
+    
+    // Get current task and timestamp
+    const existingTask = tasks[taskIndex];
+    const now = new Date().toISOString();
 
+    // Initialize updatedTask with original values
+    const updatedTask = {
+        ...existingTask,
+        updatedAt:now
+    }
+
+    if(command == "update"){    
     //Check if Description argument was assigned.
     if(!newDescription || newDescription.trim() === ""){
         console.log("Description cannot be empty. Use: task-cli update <id> <new description>");
         return;
     }
-
-    const existingTask = tasks[taskIndex]
-    const updatedTask = {
-        id: existingTask.id,
-        description:  newDescription,
-        status: existingTask.status,
-        createdAt: existingTask.createdAt,
-        updatedAt: now,
-      };
+    updatedTask.description = newDescription;
+    }
+    
+    if (command === "task-in-progress" || command === "task-done") {
+        const statusValue = command === "task-in-progress" ? "in-progress" : "done";
+        updatedTask.status = statusValue;
+      }
+    
     tasks[taskIndex] = updatedTask
     fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2),'utf8')
-    console.log(`Task [${taskID}] successfull updated without any hitch!!!`)
+
+    // Display confirmation message
+    if (command === "update") {
+        console.log(`Task [${taskID}] successfully updated.`);
+    } else {
+        console.log(`Task [${taskID}] marked as ${updatedTask.status}.`);
+    }
 }
 
 if(!fs.existsSync(dirPath)){
@@ -138,18 +165,19 @@ if(!fs.existsSync(filePath)){
 }
 
 function help() {
-    console.log("\nTask CLI - Command Line Task Manager");
-    console.log("--------------------------------------");
-    console.log("Usage:");
+    console.log("\nTASK CLI - COMMAND LINE TASK MANAGER");
+    console.log("##########################################:");
+    console.log('\n')
+    console.log("################--USAGE--#####################:");
     console.log("  task-cli <command> [arguments]\n");
-    console.log("Available Commands:");
-    console.log("  add <description>         Add a new task");
-    console.log("  list                      List all tasks");
-    console.log("  list <id>                 Show a specific task by ID");
-    console.log("  update <id> <description> Update the description of a task");
-    console.log("  remove <id>               Remove a task by ID");
-    console.log("  help                      Display this help message\n");
-    console.log("Examples:");
+    console.log("################--AVAILABLE COMMANDS--########:");
+    console.log("  add <description>  :       Add a new task");
+    console.log("  list               :       List all tasks");
+    console.log("  list <id>          :      Show a specific task by ID");
+    console.log("  update <id> <description>  :  Update the description of a task");
+    console.log("  remove <id>        :       Remove a task by ID");
+    console.log("  help               :       Display this help message\n");
+    console.log("################--EXAMPLES--###################:");
     console.log("  task-cli add \"Buy groceries\"");
     console.log("  task-cli list");
     console.log("  task-cli list 2");
@@ -164,6 +192,12 @@ if (command === "add") {
 } else if (command === "list") {
     listTasks();
 } else if (command === "update"){
+    updateTask()
+}
+else if (command === "task-in-progress"){
+    updateTask()
+}
+else if (command === "task-done"){
     updateTask()
 }
 else if (command === "help"){
