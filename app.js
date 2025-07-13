@@ -53,17 +53,19 @@ function listTasks() {
     return;
    }
 
-//   // If taskArg is a number → Try to match ID
-//   if(tasks) {
-//     const taskID = parseInt(taskArg);
-//     const task = tasks.find(t => t.id === taskID);
+  // If taskArg is a number → Try to match ID
+  if(!isNaN(parseInt(taskArg))) {
+    const taskID = parseInt(taskArg);
+    const index = tasks.findIndex(t => t.id === taskID);
 
-//     if (!task) {
-//       console.log(`Task with ID ${taskID} not found.`);
-//       return;
-//     }
-//     console.log(`📝 [${task.id}] ${task.description} - Status: ${task.status}`);
-//   } 
+    if (index === -1) {
+      console.log(`Task with ID ${taskID} not found.`);
+      return;
+    }
+    const task = tasks[index];
+    console.log(`📝 [${task.id}] ${task.description} - Status: ${task.status}`);
+    return;
+  } 
 
   // If taskArg is a valid status → Filter by status
   if(["todo","done", "in-progress"].includes(taskArg)){
