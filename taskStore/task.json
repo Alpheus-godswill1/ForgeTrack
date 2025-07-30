@@ -1,12 +1,5 @@
 [
   {
-    "id": 3,
-    "description": "Schedule dentist appointment for 5 September, 2025",
-    "status": "todo",
-    "createdAt": "2025-07-11T13:56:48.601Z",
-    "updatedAt": "2025-07-11T13:56:48.601Z"
-  },
-  {
     "id": 4,
     "description": "Plan vacation trip for December 2025",
     "status": "todo",

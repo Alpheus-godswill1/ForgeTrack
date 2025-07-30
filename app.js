@@ -205,7 +205,7 @@ else if (command === "task-done"){
 else if (command === "help"){
     help()
 }
-else if (command === "remove") {
+else if (command === "delete") {
     removeTask(task);
 } else {
     console.log("Command not found");

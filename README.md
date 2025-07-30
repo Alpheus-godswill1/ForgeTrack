@@ -19,7 +19,7 @@ ForgeTrack is also a learning journey in **Node.js**, **file system manipulation
 
 ---
 
-## 🎯 What We Are Building
+## 🎯 What I Am Building
 
 A full-featured CLI tool that lets you:
 
@@ -51,6 +51,9 @@ task-cli list
 
 # List only done tasks
 task-cli list done
+
+# Delete  tasks
+task-cli delete 1
 
 # Help Guide
 task-cli  help
