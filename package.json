@@ -33,17 +33,31 @@
     "CLI"
   ],
   "bin": {
-  "task-cli": "./app.js"
+    "task-cli": "./app.js"
   },
   "license": "ISC",
   "author": "Alpheus",
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint .",
+    "format": "prettier --write app.js"
   },
   "dependencies": {
     "express": "^5.1.0",
     "jest": "^30.0.4"
+  },
+  "devDependencies": {
+    "@eslint/css": "^0.10.0",
+    "@eslint/js": "^9.32.0",
+    "@eslint/json": "^0.13.1",
+    "@eslint/markdown": "^7.1.0",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "globals": "^16.3.0",
+    "prettier": "3.6.2",
+    "typescript-eslint": "^8.38.0"
   }
 }
