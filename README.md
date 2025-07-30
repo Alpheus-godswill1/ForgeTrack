@@ -38,7 +38,7 @@ The user interacts with the tool like this:
 task-cli add "Write project documentation"
 
 # Update a task
-task-cli update 1 "Write README and setup documentation"
+task-cli update 1 "Write README and setup Docs"
 
 # Mark task as done
 task-cli task-done 1
