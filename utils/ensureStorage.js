@@ -6,4 +6,4 @@ function ensureStorage() {
   if (!fs.existsSync(filePath)) fs.writeFileSync(filePath, JSON.stringify([]), "utf8");
 }
 
-module.exports = ensureStorage;
+module.exports = { ensureStorage };

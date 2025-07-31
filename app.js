@@ -11,7 +11,7 @@ const help = require("./core/help");
 
 // Ensure storage directory and file exist
 const {ensureStorage} = require("./utils/ensureStorage")
-
+ensureStorage();
 
 const command = process.argv[2];
 const task = process.argv[3];
