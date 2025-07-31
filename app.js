@@ -3,21 +3,14 @@
 // 2. What arguments (parameters) go with that command?
 // 3. Based on the command, what function should I run?
 
-const fs = require("fs");
-const path = require("path");
-
 const addTask = require("./core/addTask");
 const listTasks = require("./core/listTasks");
 const updateTask = require("./core/updateTask");
 const removeTask = require("./core/removeTask");
 const help = require("./core/help");
 
-const dirPath = path.join(__dirname, "taskStore");
-const filePath = path.join(dirPath, "task.json");
-
 // Ensure storage directory and file exist
-if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath);
-if (!fs.existsSync(filePath)) fs.writeFileSync(filePath, JSON.stringify([]), "utf8");
+const {ensureStorage} = require("./utils/ensureStorage")
 
 
 const command = process.argv[2];

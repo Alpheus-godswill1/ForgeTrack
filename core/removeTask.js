@@ -1,8 +1,5 @@
 const fs = require("fs");
-const path = require("path");
-
-const dirPath = path.join(__dirname, "..", "taskStore");
-const filePath = path.join(dirPath, "task.json");
+const {filePath } = require("../utils/taskPaths");
 
 function removeTask(taskId) {
   const parsedId = parseInt(taskId);

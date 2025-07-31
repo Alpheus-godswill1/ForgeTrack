@@ -1,9 +1,5 @@
 const fs = require("fs");
-const path = require("path");
-
-const dirPath = path.join(__dirname, "..", "taskStore");
-const filePath = path.join(dirPath, "task.json");
-
+const {filePath} = require("../utils/taskPaths")
 function addTask(task) {
   if (!task || task.trim().length === 0) {
     console.log("Task description is missing. Use: task-cli add <task>");
