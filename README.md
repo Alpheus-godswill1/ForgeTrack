@@ -1,3 +1,5 @@
+[![forgetrack ci](https://github.com/Alpheus-godswill1/ForgeTrack/actions/workflows/forgetrack.yml/badge.svg)](https://github.com/Alpheus-godswill1/ForgeTrack/actions/workflows/forgetrack.yml)
+
 # 🛠️ ForgeTrack
 
 **ForgeTrack** is a minimalist yet powerful Command Line Interface (CLI) tool built with **Node.js** to help users **track their tasks**, stay organized, and maintain momentum — all from the terminal.
