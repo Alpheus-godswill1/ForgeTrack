@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 const fs = require("fs");
 const addTask = require("../core/addTask");
 const { filePath } = require("../utils/taskPaths");

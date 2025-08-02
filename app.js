@@ -10,7 +10,7 @@ const removeTask = require("./core/removeTask");
 const help = require("./core/help");
 
 // Ensure storage directory and file exist
-const {ensureStorage} = require("./utils/ensureStorage")
+const { ensureStorage } = require("./utils/ensureStorage");
 ensureStorage();
 
 const command = process.argv[2];

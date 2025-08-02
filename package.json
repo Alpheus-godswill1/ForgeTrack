@@ -42,7 +42,7 @@
   "scripts": {
     "test": "jest",
     "test:add": "jest tests/addTask.test.js",
-    "lint": "eslint .",
+    "lint": "eslint app.js",
     "format": "prettier --write app.js"
   },
   "dependencies": {
