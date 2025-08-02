@@ -1,0 +1,25 @@
+services:
+  cli:
+    image: alpheusgodswill1/forgetrack-cli:latest
+    container_name: task-cli
+    entrypoint: ["task-cli"] 
+    command: ["help"]        
+    stdin_open: true
+    tty: true
+    volumes:
+      - taskStore:/app/data 
+    networks:
+      - forge-net
+
+  # Optional: Redis for future enhancements (caching, etc.)
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - forge-net
+
+networks:
+  forge-net:
+    driver: bridge
