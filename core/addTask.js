@@ -4,8 +4,7 @@ const logger = require("../services/log");
 
 function addTask(task) {
   if (!task || task.trim().length === 0) {
-    logger.warn("Task description is missing. Use: task-cli add <task>");
-    console.log("Task description is missing. Use: task-cli add <task>");
+    logger.warn("\nTask description is missing. Use: task-cli add <task>");
     return;
   }
 
@@ -27,11 +26,9 @@ function addTask(task) {
     tasks.push(newTask);
     fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2), "utf8");
 
-    logger.info(`Task added successfully - ID: ${id}, Description: "${task}"`);
-    console.log(`Task added successfully (ID: ${id})`);
+    logger.info(`\nTask added successfully - ID: ${id}, Description: "${task}"`);
   } catch (error) {
-    logger.error(`Failed to add task: ${error.message}`);
-    console.log("Error adding task. Please try again.");
+    logger.error(`\nFailed to add task: ${error.message}`);
   }
 }
 

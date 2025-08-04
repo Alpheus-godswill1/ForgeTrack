@@ -28,7 +28,12 @@ jobs:
         run: npm ci
 
       - name: Run Unit Tests
-        run: npm run test:add
+        run: |
+          npm run test:add
+          npm run test:list
+          npm run test:remove
+          npm run test:update
+
 
       - name: Generate Code Coverage
         run: npx jest --coverage

@@ -10,21 +10,16 @@ function removeTask(taskId) {
     const taskIndex = tasks.findIndex((t) => t.id === parsedId);
 
     if (taskIndex === -1) {
-      logger.warn(`Delete task requested - Task ID ${parsedId} not found`);
-      console.log(`No task with [${parsedId}] as ID exist in the taskStore`);
+      logger.warn(`\nDelete task requested - Task ID ${parsedId} not found`);
       return;
     }
 
     const removedTask = tasks.splice(taskIndex, 1)[0];
     fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2), "utf8");
 
-    logger.info(`Task deleted successfully - ID: ${removedTask.id}, Description: "${removedTask.description}"`);
-    console.log(
-      `Task [${removedTask.id}] removed successfully: "${removedTask.description}"`,
-    );
+    logger.info(`\nTask deleted successfully - ID: ${removedTask.id}, Description: "${removedTask.description}"`);
   } catch (error) {
-    logger.error(`Failed to delete task: ${error.message}`);
-    console.log("Error deleting task. Please try again.");
+    logger.error(`\nFailed to delete task: ${error.message}`);
   }
 }
 

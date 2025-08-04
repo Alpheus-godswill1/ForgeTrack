@@ -41,7 +41,10 @@
   "main": "app.js",
   "scripts": {
     "test": "jest",
-    "test:add": "jest tests/addTask.test.js",
+    "test:add": "jest __tests__/addTask.test.js",
+    "test:list": "jest __tests__/listTasks.test.js",
+    "test:update": "jest __tests__/updateTask.test.js",
+    "test:remove": "jest __tests__/removeTask.test.js",
     "lint": "eslint app.js",
     "format": "prettier --write app.js"
   },

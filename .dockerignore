@@ -1,0 +1,7 @@
+node_modules
+*.log
+.env
+.git
+__tests__
+coverage
+*.md
