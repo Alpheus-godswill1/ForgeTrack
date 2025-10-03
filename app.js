@@ -16,7 +16,7 @@ ensureStorage();
 const command = process.argv[2];
 const task = process.argv[3];
 
-if (command === "Add") {
+if (command === "add") {
   addTask(task);
 } else if (command === "list") {
   listTasks(task);
